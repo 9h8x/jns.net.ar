@@ -1,3 +1,12 @@
+---
+const { title, header } = Astro.props;
+import Navbar from "../components/Navbar.astro";
+import Typewriter from "../components/Typewriter.astro";
+import "./src/styles/global.css";
+import "@exampledev/new.css";
+import { ClientRouter } from "astro:transitions";
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -5,18 +14,29 @@
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>{title}</title>
+		<link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css" />
+		<!-- <link
+			rel="stylesheet"
+			href="https://unpkg.com/sakura.css/css/sakura.css"
+			media="screen"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://unpkg.com/sakura.css/css/sakura-dark.css"
+			media="screen and (prefers-color-scheme: dark)"
+		/> -->
+		<script
+			defer
+			data-domain="jns.net.ar"
+			src="http://pls.jns.net.ar/js/script.js"></script>
+		<ClientRouter />
 	</head>
 	<body>
+		<header>
+			<h1><Typewriter speed={200} /></h1>
+			<Navbar />
+		</header>
 		<slot />
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

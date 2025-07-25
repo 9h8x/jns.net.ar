@@ -1,0 +1,103 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const items = [
+  {
+    name: "4get",
+    url: "https://4get.jns.net.ar/",
+    server: "Alpine-G5",
+  },
+  {
+    name: "Beszel | 📧 guest@jns.net.ar 🔑 jns.net.ar",
+    url: "https://beszel.jns.net.ar",
+    server: "Elite",
+  },
+];
+---
+
+<Layout title="Home" header="jns.net.ar">
+  <details>
+    <summary>Servers</summary>
+    <ul>
+      <li>
+        <div class="bg-gray-200 dark:bg-neutral-800 rounded mb-4">
+          <strong>Elite</strong> (Argentina, Self-Hosted)
+        </div>
+        Runs almost all of the few services i have, it has 16gb of RAM and a i5-9500t.
+        <br />
+        Running <strong>Ubuntu Server 24.04 LTS</strong>
+      </li>
+      <li>
+        <div class="bg-gray-200 dark:bg-neutral-800 rounded">
+          <strong>Alpine-G5</strong> (Argentina, Self-Hosted, Not Stable)
+        </div>
+        Used for hosting lightweight services, it has 4gb of RAM and a Celeron N2808.
+        <br />
+        Could go down at any moment since its just an school laptop running <strong
+          >Alpine</strong
+        >
+      </li>
+    </ul>
+    <p>All services are passed through cloudflare tunnels since i don't have a static IP yet</p>
+  </details>
+
+  <table
+    class="min-w-full mt-8 border border-gray-300 dark:border-neutral-700 rounded"
+  >
+    <thead>
+      <tr class="bg-gray-100 dark:bg-neutral-900">
+        <th class="px-4 py-2 border-b">Service</th>
+        <th class="px-4 py-2 border-b">Server</th>
+        <th class="px-4 py-2 border-b">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {items.map((item, index) => (
+        <tr>
+          <td class="px-4 py-2 border-b">
+            {item.url ? <a href={item.url}>{item.name}</a> : item.name}
+          </td>
+          <td class="px-4 py-2 border-b">{item.server}</td>
+          <td
+            id={`status-${index}`}
+            class="px-4 py-2 border-b"
+            data-url={item.url}
+          >
+            <img
+              src="https://img.shields.io/badge/checking-grey"
+              alt="Checking"
+              class="inline"
+            />
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+
+  <script data-astro-rerun>
+    const badges = {
+      success: "https://img.shields.io/badge/online-32c75a",
+      offline: "https://img.shields.io/badge/offline-red",
+      unknown: "https://img.shields.io/badge/unknown-lightgrey"
+    };
+
+    document.querySelectorAll("td[data-url]").forEach(async (td) => {
+      const url = td.dataset.url;
+      if (!url) return;
+
+      try {
+        // HEAD request to check if URL responds
+        const res = await fetch(url, {
+          method: "HEAD",
+          mode: "no-cors",
+          cache: "no-store"
+        });
+
+        // If no error thrown, assume online
+        td.innerHTML = `<img src="${badges.success}" alt="Online" class="inline">`;
+      } catch (err) {
+        td.innerHTML = `<img src="${badges.offline}" alt="Offline" class="inline">`;
+      }
+    });
+  </script>
+</Layout>

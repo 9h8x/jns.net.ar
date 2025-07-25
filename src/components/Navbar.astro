@@ -1,0 +1,27 @@
+---
+const items = [
+    {
+        name: "Home",
+        href: "/",
+    },
+    {
+        name: "About",
+        href: "/about",
+    },
+    {
+        name: "Services",
+        href: "/services",
+    },
+];
+---
+
+<nav>
+    {
+        items.map((item, idx) => (
+            <>
+                <a href={item.href}>{item.name}</a>
+                {idx < items.length - 1 && " / "}
+            </>
+        ))
+    }
+</nav>
