@@ -1,10 +1,33 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import Socials from "../components/Socials.astro";
 ---
 
-<Layout
-  title="Home"
-  header="jns.net.ar"
->
-
+<Layout title="Home" header="jns.net.ar">
+  <div class="flex items-center gap-6">
+    <Image
+      src="https://github.com/9h8x.png"
+      alt="Profile Picture"
+      width={128}
+      height={128}
+      loading="eager"
+      class="rounded-full shadow-lg border-highlight flex-shrink-0 border-4"
+      transition:name="pfp"
+    />
+    <div>
+      <h1>
+        Hello, im <span class="highlight">Juan</span>
+      </h1>
+      <h3>
+        Im a <span class="highlight">tech enthusiast</span> based in <span
+          class="highlight">Argentina</span
+        >
+      </h3>
+    </div>
+    <Socials />
+  </div>
+  
+  <p>This website will mainly be used for a blog in the near future.</p>
+  <p></p>
 </Layout>

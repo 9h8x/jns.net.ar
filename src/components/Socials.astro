@@ -1,0 +1,38 @@
+---
+import { Icon } from 'astro-icon/components'
+const socials = [
+  {
+    name: "GitHub", 
+    href: "https://github.com/9h8x",
+    icon: "mdi:github",
+  },
+  {
+    name: "Discord",
+    href: "https://discord.com/users/1369716588810469620",
+    icon: "simple-icons:discord",
+  },
+  {
+    name: "Bluesky",
+    href: "https://bsky.app/profile/jns.net.ar",
+    icon: "simple-icons:bluesky",
+  },
+  {
+    name: "eMail",
+    href: "mailto:juan@jns.net.ar",
+    icon: "mdi:email",
+  }
+];
+---
+
+<div class="flex flex-wrap items-center gap-2 p-4 ">
+  {socials.map((social) => (
+    <a
+      href={social.href}
+      aria-label={social.name}
+      class="group relative w-12 h-12 bg-neutral-900 dark:bg-neutral-800 rounded-lg flex items-center justify-center transition-all duration-200 dark:hover:bg-white hover:bg-neutral-300 hover:scale-110"
+    >
+
+      <Icon name={social.icon} class="text-xl text-neutral-100 group-hover:text-black transition-colors duration-200" />
+    </a>
+  ))}
+</div>

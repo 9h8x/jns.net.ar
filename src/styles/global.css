@@ -29,3 +29,13 @@
   opacity: 1;
   visibility: visible;
 }
+
+@layer utilities {
+  .highlight {
+    @apply font-bold bg-gradient-to-tr from-cyan-600 via-blue-600 to-indigo-400 bg-clip-text text-transparent;
+  }
+
+  .scale-up-center {
+    animation: scale-up-center-normal 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0s 1 normal both;
+  }
+}
