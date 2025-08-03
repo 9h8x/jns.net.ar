@@ -1,8 +1,9 @@
 ---
 import { Icon } from 'astro-icon/components'
+
 const socials = [
   {
-    name: "GitHub", 
+    name: "GitHub",     
     href: "https://github.com/9h8x",
     icon: "mdi:github",
   },
@@ -24,14 +25,13 @@ const socials = [
 ];
 ---
 
-<div class="flex flex-wrap items-center gap-2 p-4 ">
+<div class="flex flex-wrap items-center justify-center gap-2 p-4">
   {socials.map((social) => (
     <a
       href={social.href}
       aria-label={social.name}
       class="group relative w-12 h-12 bg-neutral-900 dark:bg-neutral-800 rounded-lg flex items-center justify-center transition-all duration-200 dark:hover:bg-white hover:bg-neutral-300 hover:scale-110"
     >
-
       <Icon name={social.icon} class="text-xl text-neutral-100 group-hover:text-black transition-colors duration-200" />
     </a>
   ))}

@@ -1,0 +1,37 @@
+---
+const { post } = Astro.props;
+
+// Format the date for display
+const formatDate = (dateString) => {
+  return new Date(dateString).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long", 
+    day: "numeric",
+  });
+};
+
+// Extract thumbnail URL if available
+const thumbnailUrl = post.Thumbnail[0]?.url
+console.log("Thumbnail URL:", thumbnailUrl);
+---
+
+  <div class="text-center mb-8">
+    <h1 class="text-4xl font-bold text-gray-900 mb-4">
+      {post.Title}
+    </h1>
+    
+    {post.Description && (
+      <p class="text-3xl text-gray-600 dark:text-gray-400">
+        {post.Description}
+      </p>
+    )}
+    
+    <div class="flex items-center justify-center gap-4 text-gray-500 text-xl">
+      <time datetime={post.Date || post.publishedAt}>
+        {formatDate(post.Date || post.publishedAt)}
+      </time>
+      {post.updatedAt !== post.publishedAt && (
+        <span>• Updated {formatDate(post.updatedAt)}</span>
+      )}
+    </div>
+  </div>

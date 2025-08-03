@@ -1,0 +1,61 @@
+---
+import { marked } from "marked";
+
+const { post } = Astro.props;
+
+// Convert structured content blocks into markdown
+const convertToMarkdown = (contentBlocks) => {
+    if (!contentBlocks || !Array.isArray(contentBlocks)) return "";
+
+    return contentBlocks
+        .map((block) => {
+            switch (block.type) {
+                case "paragraph":
+                    return (
+                        block.children
+                            ?.map((child) => {
+                                let text = child.text || "";
+                                if (child.bold) text = `**${text}**`;
+                                if (child.italic) text = `_${text}_`;
+                                return text;
+                            })
+                            .join("") || ""
+                    );
+
+                case "heading":
+                    const level = Math.min(Math.max(block.level || 2, 1), 6);
+                    const headingText =
+                        block.children
+                            ?.map((child) => child.text || "")
+                            .join("") || "";
+                    return `${"#".repeat(level)} ${headingText}`;
+
+                case "list":
+                    const isOrdered = block.format === "ordered";
+                    return (
+                        block.children
+                            ?.map((item, index) => {
+                                const itemText =
+                                    item.children
+                                        ?.map((child) => child.text || "")
+                                        .join("") || "";
+                                return isOrdered
+                                    ? `${index + 1}. ${itemText}`
+                                    : `- ${itemText}`;
+                            })
+                            .join("\n") || ""
+                    );
+
+                default:
+                    return "";
+            }
+        })
+        .join("\n\n");
+};
+
+// Convert to HTML with marked
+const markdown = convertToMarkdown(post.Content);
+const html = marked.parse(markdown);
+---
+
+<article class="prose prose-lg max-w-none mt-8" set:html={html} />

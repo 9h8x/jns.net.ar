@@ -1,0 +1,43 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import PostHeader from "../../components/blog/PostHeader.astro";
+import PostContent from "../../components/blog/PostContent.astro";
+import { fetchPosts } from "../../lib/strapi";
+
+export async function getStaticPaths() {
+  try {
+    console.log("🔍 Fetching blog posts for static paths...");
+    const posts = await fetchPosts();
+    console.log(posts);
+    
+    const paths = posts.map((post) => {
+      const slug = post.id.toString();
+      console.log(`🛤️  Creating path: /blog/${slug}`);
+      return {
+        params: {
+          slug: slug,
+        },
+        props: { post },
+      };
+    });
+    
+    console.log(
+      "✅ Generated paths:",
+      paths.map((p) => p.params.slug),
+    );
+    return paths;
+  } catch (error) {
+    console.error("❌ Error in getStaticPaths:", error);
+    return [];
+  }
+}
+
+const { post } = Astro.props;
+---
+
+<Layout title={post.Title}>
+  <main>
+    <PostHeader post={post} />
+    <PostContent post={post} />
+  </main>
+</Layout>

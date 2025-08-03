@@ -1,35 +1,5 @@
 @import "tailwindcss";
 
-.tooltip {
-  position: relative;
-  display: inline-block;
-  border-bottom: 1px dotted black;
-}
-
-.tooltip .tooltiptext {
-  opacity: 0;
-  visibility: hidden;
-  width: 180px;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-
-  position: absolute;
-  z-index: 1;
-  top: -5px;
-  left: 105%;
-
-  /* Animation */
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-
-.tooltip:hover .tooltiptext {
-  opacity: 1;
-  visibility: visible;
-}
-
 @layer utilities {
   .highlight {
     @apply font-bold bg-gradient-to-tr from-cyan-600 via-blue-600 to-indigo-400 bg-clip-text text-transparent;
