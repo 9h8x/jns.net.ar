@@ -1,7 +1,31 @@
 ---
 import figlet from "figlet";
+import standard from "figlet/importable-fonts/Standard.js";
+import bigMoneyNe from "figlet/importable-fonts/Big Money-ne.js";
+import bigMoneyNw from "figlet/importable-fonts/Big Money-nw.js";
+import bigMoneySe from "figlet/importable-fonts/Big Money-se.js";
+import bigMoneySw from "figlet/importable-fonts/Big Money-sw.js";
+import big from "figlet/importable-fonts/Big.js";
+import doom from "figlet/importable-fonts/Doom.js";
+import graceful from "figlet/importable-fonts/Graceful.js";
+import ogre from "figlet/importable-fonts/Ogre.js";
+import slant from "figlet/importable-fonts/Slant.js";
+import terrace from "figlet/importable-fonts/Terrace.js";
 
 const { position = "centered" } = Astro.props;
+
+// Parse and load fonts
+figlet.parseFont("Standard", standard);
+figlet.parseFont("Big Money-ne", bigMoneyNe);
+figlet.parseFont("Big Money-nw", bigMoneyNw);
+figlet.parseFont("Big Money-se", bigMoneySe);
+figlet.parseFont("Big Money-sw", bigMoneySw);
+figlet.parseFont("Big", big);
+figlet.parseFont("Doom", doom);
+figlet.parseFont("Graceful", graceful);
+figlet.parseFont("Ogre", ogre);
+figlet.parseFont("Slant", slant);
+figlet.parseFont("Terrace", terrace);
 
 const Fonts = [
   "Big Money-ne",
