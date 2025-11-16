@@ -1,0 +1,60 @@
+---
+import figlet from "figlet";
+
+const { position = "centered" } = Astro.props;
+
+const Fonts = [
+  "Big Money-ne",
+  "Big Money-nw",
+  "Big Money-se",
+  "Big Money-sw",
+  "Big",
+  "Doom",
+  "Graceful",
+  "Ogre",
+  "Slant",
+  "Terrace",
+];
+
+function ascii(text: string) {
+  const font = Fonts[Math.floor(Math.random() * Fonts.length)];
+  return new Promise((resolve, reject) => {
+    figlet.text(
+      text,
+      {
+        font,
+        horizontalLayout: "default",
+        verticalLayout: "default",
+        width: 100,
+        whitespaceBreak: true,
+      },
+      (err, data) => (err ? reject(err) : resolve(data))
+    );
+  });
+}
+
+const artDesktop = await ascii("jns.net.ar");
+const artMobile = await ascii("jns");
+
+// Layout variant class
+const wrapperClass =
+  position === "top"
+    ? "p-4"
+    : "p-6"; // centered
+---
+<div
+  class={`backdrop-blur-sm bg-white/40 dark:bg-neutral-800/30 rounded-lg border border-neutral-900/20 shadow-2xl min-h-[180px] flex items-center justify-center ${wrapperClass}`}
+  transition:name="ascii"
+>
+
+  <!-- Desktop ASCII -->
+  <pre class="hidden md:block font-mono text-xs leading-none text-gray-800 dark:text-white text-center">
+{artDesktop}
+  </pre>
+
+  <!-- Mobile ASCII -->
+  <pre class="block md:hidden font-mono text-xs leading-none text-gray-800 dark:text-white text-center">
+{artMobile}
+  </pre>
+
+</div>

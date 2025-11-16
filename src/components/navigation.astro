@@ -1,0 +1,41 @@
+---
+const currentPath = Astro.url.pathname;
+
+// Define all nav items here
+const items = [
+  { name: "Home", path: "/" },
+  { name: "Services", path: "/services" },
+  { name: "Blog", path: "/blog" },
+  { name: "Information", path: "/information" },
+];
+
+// Filter: hide the Home item when path is "/"
+const visibleItems = items.filter(item =>
+  !(currentPath === "/" && item.path === "/")
+);
+---
+<div class="flex justify-center mt-4" transition:name="nav">
+  <nav class="backdrop-blur-sm bg-white/40 dark:bg-neutral-800/30 border border-neutral-900/20 shadow-lg rounded-lg px-6 py-2">
+    <ul class="flex gap-4 text-gray-800 dark:text-white">
+      
+      {visibleItems.map((item, index) => (
+        <>
+          <li>
+            <a
+              href={item.path}
+              class={`hover:underline ${
+                currentPath === item.path ? "font-semibold underline" : ""
+              }`}
+            >
+              {item.name}
+            </a>
+          </li>
+
+          {/* Add slash except after last item */}
+          {index < visibleItems.length - 1 && <span>/</span>}
+        </>
+      ))}
+
+    </ul>
+  </nav>
+</div>

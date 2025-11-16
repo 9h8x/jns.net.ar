@@ -9,6 +9,11 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.15.8"
+    "@tailwindcss/vite": "^4.1.17",
+    "@tsparticles/all": "^3.9.1",
+    "astro": "^5.15.8",
+    "figlet": "^1.9.4",
+    "tailwindcss": "^4.1.17",
+    "tsparticles": "^3.9.1"
   }
 }

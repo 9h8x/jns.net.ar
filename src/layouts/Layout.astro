@@ -1,3 +1,11 @@
+---
+import '../styles/global.css';
+import { ClientRouter } from "astro:transitions";
+
+import Footer from '../components/footer.astro';
+
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -5,18 +13,148 @@
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<meta name="title" content="jns.net.ar" />
+		<meta name="description" content="super hyper mega awesome website" />
+		<meta
+			name="keywords"
+			content="selfhosted,jns,coding,coder,hosted,jns.net.ar"
+		/>
+		<meta name="robots" content="index, follow" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="language" content="English" />
+		<meta name="revisit-after" content="1 days" />
+		<meta name="author" content="Juan S" />
+		<ClientRouter />
 	</head>
-	<body>
+	<body class="bg-white dark:bg-neutral-900 text-black dark:text-white transition-all duration-300">
+		<!-- Particles container -->
+		<div id="particles-js" class="fixed inset-0 -z-10" transition:persist></div>
+		
+		<!-- Your content -->
 		<slot />
+		
+		<!-- Particles.js -->
+		<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+		<script is:inline>
+			function initParticles() {
+				// Check if dark mode is active
+				function getIsDark() {
+    // Check site theme first (Tailwind / manual class toggle)
+    if (document.documentElement.classList.contains('dark')) {
+        return true;
+    }
+
+    // Fallback to system preference
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return true;
+    }
+
+    return false;
+}
+
+const isDark = getIsDark();
+console.log(isDark ? 'Dark mode' : 'Light mode');
+
+const particleColor = isDark ? '#ffffff' : '#000000';
+
+				
+				particlesJS('particles-js', {
+					particles: {
+						number: {
+							value: 80,
+							density: {
+								enable: true,
+								value_area: 800
+							}
+						},
+						color: {
+							value: particleColor
+						},
+						shape: {
+							type: 'circle',
+						},
+						opacity: {
+							value: 0.5,
+							random: false,
+						},
+						size: {
+							value: 3,
+							random: true,
+						},
+						line_linked: {
+							enable: true,
+							distance: 150,
+							color: particleColor,
+							opacity: 0.4,
+							width: 1
+						},
+						move: {
+							enable: true,
+							speed: 2,
+							direction: 'none',
+							random: false,
+							straight: false,
+							out_mode: 'out',
+							bounce: false,
+						}
+					},
+					interactivity: {
+						detect_on: 'canvas',
+						events: {
+							onhover: {
+								enable: true,
+								mode: 'grab'
+							},
+							onclick: {
+								enable: true,
+								mode: 'push'
+							},
+							resize: true
+						},
+						modes: {
+							grab: {
+								distance: 140,
+								line_linked: {
+									opacity: 1
+								}
+							},
+							push: {
+								particles_nb: 4
+							}
+						}
+					},
+					retina_detect: true
+				});
+			}
+			
+			// Initialize on DOM ready
+			document.addEventListener('DOMContentLoaded', initParticles);
+			
+			// Watch for dark mode changes
+			const observer = new MutationObserver(function(mutations) {
+				mutations.forEach(function(mutation) {
+					if (mutation.attributeName === 'class') {
+						initParticles();
+					}
+				});
+			});
+			
+			// Observe class changes on html element
+			observer.observe(document.documentElement, {
+				attributes: true
+			});
+		</script>
+		<Footer />
 	</body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
+	#particles-js {
+		opacity: 1;
+	}
+	
+	/* Adjust opacity for dark mode */
+	:global(.dark) #particles-js {
+		opacity: 0.6;
 	}
 </style>

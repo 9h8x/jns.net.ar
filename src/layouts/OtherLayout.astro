@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+import figlet from 'figlet';
+import Navigation from '../components/navigation.astro';
+import Ascii from '../components/ascii.astro';
+
+
+---
+
+<Layout>
+  <div class="min-h-screen p-4 flex flex-col">
+    <div class="w-full max-w-6xl mx-auto flex-1 flex flex-col">
+      
+        <Ascii position="top" />
+
+      <Navigation />
+
+
+      <!-- Main Content Card -->
+      <div class="flex-1 mt-6 mb-4">
+        <div class="backdrop-blur-sm bg-white/40 dark:bg-neutral-800/30 rounded-lg border border-white/20 shadow-2xl h-full overflow-y-auto">
+          <div class="p-6">
+            <!-- Slot for page-specific content -->
+            <slot />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .nav-btn.active {
+      background: rgba(255, 255, 255, 0.288);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    :global(.dark) .nav-btn.active {
+      background: rgba(38, 38, 38, 0.6);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+  </style>
+</Layout>
