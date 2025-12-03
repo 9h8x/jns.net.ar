@@ -1,3 +1,6 @@
+[a link](https://jns.net.ar)
+
+[b link](intent://com.android.settings/#Intent;scheme=android-app;end)
 # Astro Starter Kit: Basics
 
 ```sh
