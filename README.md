@@ -1,6 +1,6 @@
 [a link](https://jns.net.ar)
 
-[b link](intent://com.android.settings/#Intent;scheme=android-app;end)
+[b link](https://vnrom.net/bypass/)
 # Astro Starter Kit: Basics
 
 ```sh
