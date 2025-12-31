@@ -1,3 +1,6 @@
+[a link](https://jns.net.ar)
+
+[b link](https://gsmneofrpgratis.com/)
 # Astro Starter Kit: Basics
 
 ```sh
